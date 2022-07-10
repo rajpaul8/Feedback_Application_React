@@ -2,12 +2,12 @@ import React from "react";
 import Card from "./shared/Card";
 import { useState } from "react";
 import Button from "./shared/Button";
-
+import RatingSelect from './RatingSelect'
 function FeedbackForm() {
   const [text, setText] = useState("");
   const [message, setMessage] = useState("");
   const [btnDisabled, setBtnDisabled] = useState(true);
-
+    const [rating, setRating] = useState(10)
   const handleTextChange = (e) => {
     e.preventDefault();
     // Set message and disable button if char <10
@@ -40,7 +40,9 @@ function FeedbackForm() {
               Send
             </Button>
           </div>
-                  {message && <div className="message">{ message }</div>}
+          {message && <div className="message">{message}</div>}
+
+          <RatingSelect select={(rating) => setRating(rating)}></RatingSelect>
         </form>
       </Card>
     </>
