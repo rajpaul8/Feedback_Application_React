@@ -1,13 +1,21 @@
-import React from 'react'
-import { useState } from 'react';
+import React from "react";
+import { useState, useContext, useEffect } from "react";
+import FeedbackContext from "../context/FeedbackContext";
 
-function RatingSelect({ select}) {
-    const [selected, setSelected] = useState(10);
-    const handleChange = (e) => {
-            // '+' sign to convert string to number 
-            setSelected(+e.currentTarget.value)
-            select(+e.currentTarget.value)
-    }
+function RatingSelect({ select }) {
+  const [selected, setSelected] = useState(10);
+
+  //Select Rating while editing the form
+  const { feedbackEdit } = useContext(FeedbackContext);
+  useEffect(() => {
+    setSelected(feedbackEdit.item.rating);
+  }, [feedbackEdit]);
+
+  const handleChange = (e) => {
+    // '+' sign to convert string to number
+    setSelected(+e.currentTarget.value);
+    select(+e.currentTarget.value);
+  };
   return (
     <ul className="rating">
       {Array.from({ length: 10 }, (_, i) => (
@@ -27,4 +35,4 @@ function RatingSelect({ select}) {
   );
 }
 
-export default RatingSelect
+export default RatingSelect;
