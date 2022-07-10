@@ -10,7 +10,8 @@ function FeedbackForm() {
   const [message, setMessage] = useState("");
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [rating, setRating] = useState(10);
-  const { addFeedBack, feedbackEdit } = useContext(FeedbackContext);
+  const { addFeedBack, feedbackEdit, updateFeedbackItem } =
+    useContext(FeedbackContext);
 
   // Auto fill the existing info in the same form
   useEffect(() => {
@@ -44,7 +45,12 @@ function FeedbackForm() {
         text,
         rating,
       };
-      addFeedBack(newFeedbackItem);
+      if (feedbackEdit.edit === true) {
+        updateFeedbackItem(feedbackEdit.item.id, newFeedbackItem);
+      } else {
+        addFeedBack(newFeedbackItem);
+      }
+
       setText("");
     }
   };

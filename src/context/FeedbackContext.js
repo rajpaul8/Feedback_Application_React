@@ -26,6 +26,14 @@ export const FeedbackProvider = ({ children }) => {
       edit: true,
     });
   };
+
+  // Update Feedback Item
+  const updateFeedbackItem = (id, updItem) => {
+    setFeedback(
+      feedback.map((item) => (item.id === id ? { ...item, ...updItem } : item))
+    );
+  };
+
   //Delete Feedback
   const removeFeedback = (item) => {
     if (window.confirm("Are you sure you want to delete>")) {
@@ -50,6 +58,7 @@ export const FeedbackProvider = ({ children }) => {
         addFeedBack: addFeedBack,
         editFeedback: editFeedback,
         feedbackEdit: feedbackEdit,
+        updateFeedbackItem: updateFeedbackItem,
       }}
     >
       {children}
