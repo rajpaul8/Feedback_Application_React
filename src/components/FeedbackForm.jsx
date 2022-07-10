@@ -2,12 +2,12 @@ import React from "react";
 import Card from "./shared/Card";
 import { useState } from "react";
 import Button from "./shared/Button";
-import RatingSelect from './RatingSelect'
-function FeedbackForm() {
+import RatingSelect from "./RatingSelect";
+function FeedbackForm({ addFeedBack }) {
   const [text, setText] = useState("");
   const [message, setMessage] = useState("");
   const [btnDisabled, setBtnDisabled] = useState(true);
-    const [rating, setRating] = useState(10)
+  const [rating, setRating] = useState(10);
   const handleTextChange = (e) => {
     e.preventDefault();
     // Set message and disable button if char <10
@@ -23,10 +23,21 @@ function FeedbackForm() {
     }
     setText(e.target.value);
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (text.trim().length > 10) {
+      const newFeedbackItem = {
+        text,
+        rating,
+      };
+      addFeedBack(newFeedbackItem);
+      setText("");
+    }
+  };
   return (
     <>
       <Card>
-        <form>
+        <form onSubmit={handleSubmit}>
           <h2>How would you rate our service with us?</h2>
           {/* @todo - Rating Service Ratio Button Option To be Added */}
           <div className="input-group">
