@@ -7,7 +7,7 @@ function FeedBackItem({ feedback, removeFeedback, editFeedback }) {
       <Card>
         <div className="num-display">{feedback.rating}</div>
         <div>
-          <button className="close" onClick={() => removeFeedback(feedback)}>
+          <button className="close" onClick={() => removeFeedback(feedback.id)}>
             <FaTimes color="purple"></FaTimes>
           </button>
           <button className="edit" onClick={() => editFeedback(feedback)}>
