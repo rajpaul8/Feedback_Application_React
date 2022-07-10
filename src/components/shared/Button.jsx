@@ -2,8 +2,14 @@ import React from 'react'
 import PropTypes from "prop-types";
 function Button({ children, type, version, isDisabled}) {
   return (
-      <button type={type} className={`btn btn-${version}`}>{ children }</button>
-  )
+    <button
+      type={type}
+      className={`btn btn-${version}`}
+      disabled={isDisabled}
+    >
+      {children}
+    </button>
+  );
 }
 Button.defaultProps = {
     type: 'button',
